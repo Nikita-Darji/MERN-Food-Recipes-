@@ -10,6 +10,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use('/recipe',require('./routes/recipe'))
+app.use('/',require('./routes/user'))
 
 app.listen(PORT,(err)=>{
     console.log(`app is listning on port ${PORT}`);
