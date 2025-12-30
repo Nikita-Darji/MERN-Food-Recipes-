@@ -16,5 +16,3 @@ A full-stack food recipe application built using the MERN stack. The backend pro
 ## Future Enhancements
 - Add new recipes (POST API)
 - User authentication
-- Food ordering functionality
-- Payment integration
