@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Model from './Model'
+import Form from './Form'
 
 export default function Navbar() {
 
@@ -19,7 +20,7 @@ export default function Navbar() {
             <li onClick={checkisOpen}>Login</li>
         </ul>
     </header>
-    {(isopen) && <Model onClose={()=>setisopen(false)}/>}
+    {(isopen) && <Model onClose={()=>setisopen(false)}><Form setisopen={()=>setisopen(false)}/></Model>}
     </>
   )
 }

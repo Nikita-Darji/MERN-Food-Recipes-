@@ -23,17 +23,17 @@ const userLogin=async(req,res)=>{
     if(!email||!password){
         return res.status(400).json({message:"Email and password is required"})
     }
-    let user =await User.findOne({email})
-    if(user && await bcrypt.compare(password,user.password)){
-        let token = jwt.sign({email,id:user._id},process.env.SECRET_KEY)
-        return res.status(200).json({token,user})
+    let newUser =await User.findOne({email})
+    if(newUser && await bcrypt.compare(password,newUser.password)){
+        let token = jwt.sign({email,id:newUser._id},process.env.SECRET_KEY)
+        return res.status(200).json({token,newUser})
     }else{
         return res.status(400).json({message:"Invalid Credantials"})
     }
 }
 const getUser=async(req,res)=>{
-    const user = await User.findById(req.params.id)
-    res.json({email:user.email})
+    const newUser = await User.findById(req.params.id)
+    res.json({email:newUser.email})
 }
 
 module.exports= {usersignUp,userLogin,getUser}
