@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import './App.css'
 import MainNavigation from './components/MainNavigation';
 import axios from 'axios';
+import AddFoodRecipes from './pages/AddFoodRecipes';
 
 const getAllRecipes = async ()=>{
   let allRecipes=[]
@@ -12,10 +13,21 @@ const getAllRecipes = async ()=>{
   })
   return allRecipes
 }
+const myrecepies=async()=>{
+  let userData = JSON.parse(localStorage.getItem("user"))
+  let getAll = await getAllRecipes()
+  console.log(getAll?.recipe);
+  
+  return getAll?.recipe.filter(item=>item.createdby===userData._id)
+}
 
 const router = createBrowserRouter([
   {path:'/',element:<MainNavigation/>,children:[
-     {path:'/',element:<Home/>,loader:getAllRecipes}
+     {path:'/',element:<Home/>,loader:getAllRecipes},
+      {path:'/recepies',element:<Home/>,loader:myrecepies},
+      {path:'/favorites',element:<Home/>},
+      {path:'/addFoodRecipes',element:<AddFoodRecipes/>}
+
   ]}
 ])
 export default function App() {

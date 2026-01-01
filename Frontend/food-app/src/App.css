@@ -20,7 +20,7 @@ header {
 }
 
 header ul{
-  width: 40%;
+  width: 50%;
   height: 50px;
   display: flex;
   justify-content: space-evenly;
