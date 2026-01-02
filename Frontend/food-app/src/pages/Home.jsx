@@ -6,6 +6,7 @@ import Model from '../components/Model'
 import Form from '../components/Form'
 
 export default function Home() {
+        
     const navi = useNavigate()
     const [isopen,setisopen]=useState(false)
     const addRecepi=()=>{

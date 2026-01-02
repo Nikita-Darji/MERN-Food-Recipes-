@@ -13,7 +13,7 @@ export default function RecipesItem() {
   return (
     <div className='card-container'>
         {
-            allrecipes?.recipe?.map((item,index)=>{
+            allrecipes.map((item,index)=>{
                 return(
                     <div key={index} className='card'>
                         <img src={`http://localhost:5000/images/${item.coverImg}`} width='120px' height='100px'></img>
