@@ -16,6 +16,16 @@ export default function RecipesItem() {
 
     const [allRecipe,setallRecipe] = useState()
 
+    let favorite = JSON.parse(localStorage.getItem('fav')) ?? []
+    const [isfavRecipe,setisfavRecipe] =useState(false)
+
+    const favRecepi=(item)=>{
+        const favo = favorite.filter(reci=>reci._id !== item._id)
+        favorite = favorite.filter(reci=>reci._id === item._id).length===0?[...favorite,item]:favo
+        localStorage.setItem("fav",JSON.stringify(favorite))
+        // setallRecipe(prv=>!prv)
+    }
+
     useEffect(() => {
         setallRecipe(allrecipes)
     }, [allrecipes])
@@ -24,6 +34,8 @@ export default function RecipesItem() {
         await axios.delete(`http://localhost:5000/recipe/${id}`)
         .then((res)=>console.log(res))
         setallRecipe(recipe=>recipe.filter(recipe=>recipe._id !== id))
+        const favo = favorite.filter(reci=>reci._id !== id)
+        localStorage.setItem("fav",JSON.stringify(favo))
     }
     
   return (
@@ -38,7 +50,8 @@ export default function RecipesItem() {
                             <div className='icons'>
                                 <div className='timer'><BsStopwatchFill />{item.time}</div>
                                 {(!path)?
-                                <FaHeart />:
+                                <FaHeart onClick={()=>favRecepi(item)}
+                                style={{color:(favorite.some(res=>res._id===item._id))?"red":""}}/>:
                                 <div className='action'>
                                     <Link to={`/editRecipe/${item._id}`} className='editIcon'><FaEdit /></Link>
                                     <MdDelete onClick={()=>deleteItem(item._id)} />
