@@ -1,18 +1,24 @@
-# Food Recipe Application (MERN Stack)
+Food Recipe Application (MERN Stack)
 
-## Description
-A full-stack food recipe application built using the MERN stack. The backend provides REST APIs to fetch recipe data from MongoDB, and the React frontend displays recipes dynamically in a clean user interface.
+Description:
 
-## Features
-- Fetch food recipes using GET REST API
-- Display recipe cards on the frontend
+This is a full-stack Food Recipe application built using the MERN stack. It includes JWT-based authentication that allows users to register and log in securely. Each user can manage their own recipes, upload images, and save favorite recipes. The app focuses on a smooth, user-specific experience with protected routes and dynamic UI updates.
 
-## Tech Stack
+Features
+- User registration and login functionality
+- JWT-based authentication for secure access
+- Protected routes for logged-in users
+- Recipe image upload using Multer
+
+Recipe Management
+
+- View all recipes on the home page
+- View user-specific recipes on “My Recipes” page
+- Add new recipes
+- Edit and delete only own recipes
+
+Tech Stack
 - Frontend: React, JavaScript, HTML, CSS
 - Backend: Node.js, Express.js
 - Database: MongoDB
 - Version Control: Git & GitHub
-
-## Future Enhancements
-- Add new recipes (POST API)
-- User authentication
