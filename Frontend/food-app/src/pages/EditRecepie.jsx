@@ -50,7 +50,7 @@ export default function EditRecepie() {
             </div>
             <div className='form-control'>
                 <label>Time</label>
-                <input type='text' className='input' name='Time' onChange={handlechange} value={recepiesData.time} ></input>
+                <input type='text' className='input' name='time' onChange={handlechange} value={recepiesData.time} ></input>
             </div>
             <div className='form-control'>
                 <label>Ingredients</label>

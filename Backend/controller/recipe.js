@@ -1,3 +1,4 @@
+const { response } = require("express")
 const Recipes= require("../models/recipes")
 const multer  = require('multer')
 
@@ -40,15 +41,21 @@ const editrecepies=async(req,res)=>{
 
     try{
         if(recipe){
-        await Recipes.findByIdAndUpdate(req.params.id,{...req.body,coverImg:req.file.filename},{new:true})
+        const coverImage = req.file?.filename? req.file.filename: recipe.coverImg
+        await Recipes.findByIdAndUpdate(req.params.id,{...req.body,coverImage},{new:true})
         return res.json({title,ingredients,instructions,time})
     }
     }catch(err){
         return res.status(404).json({message:"error"})
     }
 }
-const deleterecepies=(req,res)=>{
-    res.json({message:"heluuuullo"})
+const deleterecepies=async(req,res)=>{
+    try{
+        await Recipes.deleteOne({_id:req.params.id})
+        res.json({status:'Ok'})
+    }catch(error){
+        return res.status(200).json({message:'Error'})
+    }
 }
 
 module.exports={getrecipe,getrecipesid,addrecipies,editrecepies,deleterecepies,upload}

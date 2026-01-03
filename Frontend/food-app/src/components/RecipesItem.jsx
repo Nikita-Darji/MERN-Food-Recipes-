@@ -5,20 +5,31 @@ import { BsStopwatchFill } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-
-
-
+import axios from 'axios';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function RecipesItem() {
 
-    let path= window.location.pathname==='/recepies'
+    let path= window.location.pathname==='/recepies'?true:false
     const allrecipes= useLoaderData()
-    // console.log(allrecipes.recipe);
+
+    const [allRecipe,setallRecipe] = useState()
+
+    useEffect(() => {
+        setallRecipe(allrecipes)
+    }, [allrecipes])
+    
+    const deleteItem=async(id)=>{
+        await axios.delete(`http://localhost:5000/recipe/${id}`)
+        .then((res)=>console.log(res))
+        setallRecipe(recipe=>recipe.filter(recipe=>recipe._id !== id))
+    }
     
   return (
     <div className='card-container'>
         {
-            allrecipes.map((item,index)=>{
+            allRecipe?.map((item,index)=>{
                 return(
                     <div key={index} className='card'>
                         <img src={`http://localhost:5000/images/${item.coverImg}`} width='120px' height='100px'></img>
@@ -30,7 +41,7 @@ export default function RecipesItem() {
                                 <FaHeart />:
                                 <div className='action'>
                                     <Link to={`/editRecipe/${item._id}`} className='editIcon'><FaEdit /></Link>
-                                    <MdDelete />
+                                    <MdDelete onClick={()=>deleteItem(item._id)} />
                                 </div>
                                 }
                                 
